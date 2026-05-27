@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notification Redesign — Cart & Checkout Flow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #004977;
+    --red: #D03027;
+    --green: #00875A;
+    --green-bg: #E0F2EB;
+    --blue: #0066CC;
+    --surface: #F5F4EF;
+    --border: #E5E4DF;
+    --text-1: #1A1A1A;
+    --text-2: #5A5A55;
+    --text-3: #9A958A;
+    --page-bg: #FAFAF6;
+    --paper: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--page-bg);
+    color: var(--text-1);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .doc {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 80px 48px 120px;
+  }
+
+  /* — Editorial header — */
+  .masthead {
+    border-bottom: 0.5px solid var(--text-1);
+    padding-bottom: 32px;
+    margin-bottom: 64px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 32px;
+  }
+  .masthead .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    margin-bottom: 24px;
+  }
+  .masthead h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(40px, 6vw, 64px);
+    line-height: 1.05;
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+  }
+  .masthead h1 em {
+    font-style: italic;
+    font-weight: 300;
+  }
+  .masthead .deck {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-2);
+    max-width: 520px;
+    margin: 0;
+  }
+  .masthead .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-3);
+    text-align: right;
+    line-height: 1.8;
+    letter-spacing: 0.04em;
+  }
+
+  /* — TOC — */
+  .toc {
+    background: var(--paper);
+    border: 0.5px solid var(--border);
+    padding: 28px 32px;
+    margin-bottom: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 32px;
+  }
+  .toc-title {
+    grid-column: 1 / -1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 12px;
+  }
+  .toc a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 6px 0;
+    color: var(--text-1);
+    text-decoration: none;
+    font-size: 14px;
+    border-bottom: 0.5px dotted var(--border);
+    transition: color 0.15s;
+  }
+  .toc a:hover { color: var(--navy); }
+  .toc a .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-3);
+  }
+
+  /* — Section structure — */
+  section {
+    margin-bottom: 96px;
+  }
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+    padding-top: 16px;
+  }
+  h2 .num {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin-bottom: 12px;
+  }
+  h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 22px;
+    margin: 48px 0 16px;
+    letter-spacing: -0.005em;
+  }
+  h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    margin: 32px 0 12px;
+  }
+  p { margin: 0 0 16px; color: var(--text-1); max-width: 68ch; }
+  p.lede {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    line-height: 1.5;
+    font-weight: 300;
+    color: var(--text-1);
+    margin-bottom: 32px;
+    max-width: 30ch;
+  }
+  strong { font-weight: 600; }
+  em { font-style: italic; }
+
+  /* — Principle list — */
+  .principles {
+    list-style: none;
+    padding: 0;
+    margin: 32px 0;
+    counter-reset: principle;
+  }
+  .principles li {
+    counter-increment: principle;
+    padding: 24px 0 24px 56px;
+    border-top: 0.5px solid var(--border);
+    position: relative;
+  }
+  .principles li:last-child { border-bottom: 0.5px solid var(--border); }
+  .principles li::before {
+    content: counter(principle, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 26px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.08em;
+  }
+  .principles strong {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+  .principles p { margin: 0; color: var(--text-2); font-size: 14px; }
+
+  /* — State block — */
+  .state {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 56px;
+    align-items: start;
+    padding: 32px 0;
+  }
+  .state .canvas {
+    background: var(--paper);
+    border: 0.5px solid var(--border);
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 32px;
+  }
+  .state .info h3 {
+    margin-top: 0;
+  }
+  .state-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-2);
+    margin: 0 0 24px;
+    padding: 12px 0;
+    border-top: 0.5px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 6px 16px;
+    letter-spacing: 0.04em;
+  }
+  .state-meta dt { color: var(--text-3); text-transform: uppercase; font-size: 10px; }
+  .state-meta dd { margin: 0; color: var(--text-1); }
+
+  .actions {
+    background: var(--surface);
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+  .actions h4 { margin-top: 0; }
+  .actions ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+  }
+  .actions li {
+    padding: 4px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+  .actions li .arrow { color: var(--text-3); margin: 0 6px; }
+
+  /* — Notification mockup — the actual UI — */
+  .notif {
+    width: 320px;
+    background: white;
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--text-1);
+  }
+  .notif-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+  .logo-placeholder {
+    width: 32px;
+    height: 16px;
+    background: var(--border);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7px;
+    color: #999;
+    letter-spacing: 0.1em;
+  }
+  .x { font-size: 16px; color: var(--text-3); cursor: pointer; line-height: 1; }
+  .lifetime {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    font-size: 11px;
+  }
+  .lifetime .strike {
+    color: var(--text-3);
+    text-decoration: line-through;
+    font-size: 11px;
+  }
+  .lifetime .amount {
+    color: var(--blue);
+    font-weight: 500;
+    font-size: 13px;
+  }
+  .lifetime .label { color: var(--text-2); font-size: 10px; }
+
+  .eyebrow-text { font-size: 12px; color: var(--text-2); margin-bottom: 4px; }
+  .hero-amount {
+    color: var(--navy);
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .subline { font-size: 12px; color: var(--text-2); margin-bottom: 14px; }
+  .subline .excl-link {
+    color: var(--text-2);
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 2px;
+    font-size: 11px;
+    margin-left: 6px;
+    cursor: help;
+  }
+
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 11px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+  .btn-primary { background: var(--navy); color: white; }
+  .btn-secondary {
+    background: white;
+    color: var(--navy);
+    border: 0.5px solid var(--border);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-2);
+    font-size: 12px;
+    padding: 8px;
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--navy);
+    border: 0.5px solid var(--navy);
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+  }
+  .card-accent { border-left: 2px solid var(--green); }
+  .card-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-icon {
+    width: 28px;
+    height: 28px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 13px;
+  }
+  .card-icon-success {
+    background: var(--green-bg);
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    color: var(--green);
+  }
+  .card-text { flex: 1; min-width: 0; }
+  .card-title { font-size: 12px; font-weight: 500; }
+  .card-sub { font-size: 11px; color: var(--text-2); }
+
+  .live-dot {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+    margin-right: 10px;
+  }
+  .live-dot::before, .live-dot::after {
+    content: ''; position: absolute; inset: 0;
+    background: var(--green); border-radius: 50%;
+  }
+  .live-dot::after { inset: -3px; opacity: 0.25; }
+
+  .divider {
+    border-top: 0.5px solid var(--border);
+    margin: 12px -16px;
+    padding-top: 12px;
+  }
+  .divider-tight {
+    border-top: 0.5px solid var(--border);
+    margin: 8px 0;
+    padding-top: 8px;
+  }
+
+  .loading-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--text-2);
+  }
+  .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border);
+    border-top-color: var(--text-2);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .code-list { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; }
+  .code-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+  }
+  .code-row.tested { color: var(--text-1); }
+  .code-row.tested .check { color: var(--green); }
+  .code-row.testing {
+    background: var(--surface);
+    border-radius: 4px;
+    color: var(--navy);
+    font-weight: 500;
+  }
+  .code-row.testing .spinner-sm {
+    width: 10px;
+    height: 10px;
+    border: 2px solid var(--border);
+    border-top-color: var(--navy);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  .code-row.pending { opacity: 0.5; color: var(--text-2); }
+  .code-row .empty-dot {
+    width: 10px;
+    height: 10px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+  }
+  .code-row .label { flex: 1; }
+  .code-row .meta { font-size: 10px; color: var(--text-2); }
+
+  .icon-success {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .icon-success-text .title { font-size: 14px; font-weight: 500; }
+  .icon-success-text .sub { font-size: 11px; color: var(--text-2); }
+
+  .receipt-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+  }
+  .receipt-row .label-block .label { font-size: 12px; }
+  .receipt-row .label-block .code { font-size: 10px; color: var(--text-2); font-family: 'JetBrains Mono', monospace; }
+  .receipt-row .amount { font-size: 14px; font-weight: 500; }
+  .receipt-row .amount.negative { color: var(--navy); }
+  .receipt-row .amount.positive { color: var(--green); }
+
+  .disclosure {
+    font-size: 10px;
+    color: var(--text-3);
+    line-height: 1.5;
+    margin-bottom: 12px;
+    padding: 0 4px;
+  }
+  .disclosure strong { color: var(--text-3); }
+
+  .footer-locked {
+    border-top: 0.5px solid var(--border);
+    padding-top: 10px;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--text-2);
+  }
+  .footer-locked .check { color: var(--green); }
+  .footer-locked strong { color: var(--text-1); font-weight: 500; }
+
+  /* — Pin (state 5) — */
+  .pin {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 0.5px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 12px 6px 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .pin .check { color: var(--green); font-size: 13px; }
+  .pin .sub { font-size: 10px; color: var(--text-2); font-weight: 400; }
+
+  /* — Flow chart — */
+  .flow {
+    background: var(--paper);
+    border: 0.5px solid var(--border);
+    padding: 32px;
+    margin: 32px 0;
+    overflow-x: auto;
+  }
+  .flow svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+
+  /* — Tables — */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 13px;
+  }
+  th, td {
+    text-align: left;
+    padding: 12px 16px 12px 0;
+    border-bottom: 0.5px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    border-bottom: 0.5px solid var(--text-1);
+  }
+  td code, td .swatch {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+  .swatch {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .swatch-chip {
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+    border: 0.5px solid rgba(0,0,0,0.1);
+    flex-shrink: 0;
+  }
+
+  /* — Question cards — */
+  .questions {
+    display: grid;
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .question {
+    background: var(--paper);
+    border: 0.5px solid var(--border);
+    border-left: 2px solid var(--navy);
+    padding: 20px 24px;
+  }
+  .question .who {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .question ol { margin: 0; padding-left: 20px; font-size: 14px; }
+  .question li { padding: 6px 0; color: var(--text-1); }
+
+  /* — Spacing utilities — */
+  .small { font-size: 13px; color: var(--text-2); }
+
+  @media (max-width: 720px) {
+    .doc { padding: 48px 24px 80px; }
+    .state { grid-template-columns: 1fr; gap: 32px; }
+    .state .canvas { position: static; }
+    .toc { grid-template-columns: 1fr; }
+    .masthead { grid-template-columns: 1fr; }
+    .masthead .meta { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="doc">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow">Design Specification · v1</div>
+      <h1>Cart Notification, <em>Reconsidered</em></h1>
+      <p class="deck">A unified flow that lets rewards lead, codes enhance, and never breaks a promise the data can't keep.</p>
+    </div>
+    <div class="meta">
+      Document v1<br>
+      For design review<br>
+      Pending legal sign-off
+    </div>
+  </header>
+
+  <nav class="toc">
+    <div class="toc-title">Contents</div>
+    <a href="#principles"><span>Design principles</span><span class="num">§ 01</span></a>
+    <a href="#flow"><span>Full journey map</span><span class="num">§ 02</span></a>
+    <a href="#s1"><span>State 1 · First paint</span><span class="num">§ 03</span></a>
+    <a href="#s2a"><span>State 2a · Rewards-only settled</span><span class="num">§ 04</span></a>
+    <a href="#s2b"><span>State 2b · Codes also ready</span><span class="num">§ 05</span></a>
+    <a href="#s3ab"><span>State 3a/3b · Rewards activated</span><span class="num">§ 06</span></a>
+    <a href="#s3c"><span>State 3c · Testing codes</span><span class="num">§ 07</span></a>
+    <a href="#s4a"><span>State 4a · Code + rewards win</span><span class="num">§ 08</span></a>
+    <a href="#s4b"><span>State 4b · Codes failed</span><span class="num">§ 09</span></a>
+    <a href="#s5"><span>State 5 · Checkout pin</span><span class="num">§ 10</span></a>
+    <a href="#s6"><span>State 6 · Post-purchase</span><span class="num">§ 11</span></a>
+    <a href="#implementation"><span>Implementation notes</span><span class="num">§ 12</span></a>
+    <a href="#questions"><span>Open questions</span><span class="num">§ 13</span></a>
+  </nav>
+
+  <!-- — PRINCIPLES — -->
+  <section id="principles">
+    <h2><span class="num">§ 01</span>Design principles</h2>
+    <p class="lede">Six commitments that hold the flow together.</p>
+
+    <ol class="principles">
+      <li>
+        <strong>Rewards is the deterministic floor; codes are the upside.</strong>
+        <p>Every path through the flow ends with rewards activated — even when codes fail, even when codes never existed. This makes rewards the minimum guaranteed value of every interaction.</p>
+      </li>
+      <li>
+        <strong>Progressive loading matches technical reality.</strong>
+        <p>Rewards loads in ~100ms on URL match; codes need full DOM (~1-3s). The notification paints with rewards as the hero and enhances with codes when available — never blocking the fast path on the slow one.</p>
+      </li>
+      <li>
+        <strong>Copy gradient matches certainty.</strong>
+        <p>Codes get hedged language ("ready to try", "3,427 saved today"). Rewards gets specific dollar language ("$3.64 back", "rewards activated"). The honesty calibrates user trust correctly.</p>
+      </li>
+      <li>
+        <strong>Visual weight is inversely proportional to user uncertainty.</strong>
+        <p>Loud on first paint when the offer is unknown. Loudest at success when celebration matters. Smallest at checkout when payment focus matters. Re-expanded post-purchase to close the loop.</p>
+      </li>
+      <li>
+        <strong>Lifetime Savings is the persistent identity element.</strong>
+        <p>Visible in the header from State 2a onward. Ticks visibly at every value-delivering moment. This is the brand's strongest narrative device — accumulated value made tangible.</p>
+      </li>
+      <li>
+        <strong>The X means "I don't want to engage at all."</strong>
+        <p>Visible only in States 1 and 2b, before commitment. Once the user has chosen a path, X disappears and Lifetime Savings takes its place. Never two dismiss paths at once.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- — FLOW — -->
+  <section id="flow">
+    <h2><span class="num">§ 02</span>Full journey map</h2>
+    <p>Every state and every transition. Solid arrows are progressions; dotted arrows are dismissals.</p>
+
+    <div class="flow">
+      <svg viewBox="0 0 800 620" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+          <marker id="arr-d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="#9A958A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+
+        <!-- Start -->
+        <g>
+          <ellipse cx="400" cy="30" rx="80" ry="18" fill="none" stroke="#1A1A1A" stroke-width="0.75"/>
+          <text x="400" y="35" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#1A1A1A">User lands on cart</text>
+        </g>
+        <line x1="400" y1="48" x2="400" y2="78" stroke="#1A1A1A" stroke-width="0.75" marker-end="url(#arr)"/>
+
+        <!-- State 1 -->
+        <g>
+          <rect x="310" y="80" width="180" height="56" rx="4" fill="#E8F0F5" stroke="#004977" stroke-width="0.75"/>
+          <text x="400" y="100" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#004977" letter-spacing="0.04em">STATE 1</text>
+          <text x="400" y="118" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#1A1A1A">First paint</text>
+          <text x="400" y="130" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#5A5A55">rewards visible, codes loading</text>
+        </g>
+
+        <line x1="400" y1="136" x2="400" y2="166" stroke="#1A1A1A" stroke-width="0.75" marker-end="url(#arr)"/>
+
+        <!-- Decision: codes loaded? -->
+        <g>
+          <polygon points="320,168 480,168 500,196 480,224 320,224 300,196" fill="white" stroke="#1A1A1A" stroke-width="0.75"/>
+          <text x="400" y="194" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#1A1A1A">Codes resolved?</text>
+          <text x="400" y="210" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#5A5A55">within 5s timeout</text>
+        </g>
+
+        <!-- No -> 2a -->
+        <line x1="305" y1="208" x2="200" y2="248" stroke="#1A1A1A" stroke-width="0.75" marker-end="url(#arr)"/>
+        <text x="230" y="225" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A5A55">no</text>
+
+        <!-- Yes -> 2b -->
+        <line x1="495" y1="208" x2="600" y2="248" stroke="#1A1A1A" stroke-width="0.75" marker-end="url(#arr)"/>
+        <text x="555" y="225" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A5A55">yes</text>
+
+        <!-- State 2a -->
+        <g>
+          <rect x="100" y="250" width="200" height="56" rx="4" fill="#E8F4EE" stroke="#00875A" stroke-width="0.75"/>
+          <text x="200" y="270" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#00875A" letter-spacing="0.04em">STATE 2A</text>
+          <text x="200" y="288" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#1A1A1A">Rewards-only settled</text>
+          <text x="200" y="300" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#5A5A55">social proof footer</text>
+        </g>
+
+        <!-- State 2b -->
+        <g>
+          <rect x="500" y="250" width="200" height="56" rx="4" fill="#E8F0F5" stroke="#004977" stroke-width="0.75"/>
+          <text x="600" y="270" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#004977" letter-spacing="0.04em">STATE 2B</text>
+          <text x="600" y="288" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#1A1A1A">Codes also ready</text>
+          <text x="600" y="300" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#5A5A55">two CTAs visible</text>
+        </g>
+
+        <!-- 2a -> 3a -->
+        <line x1="200" y1="306" x2="200" y2="336" stroke="#1A1A1A" stroke-width="0.75" marker-end="url(#arr)"/>
+        <text x="218" y="324" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A5A55">activate</text>
+
+        <!-- 2b -> 3b (left) -->
+        <line x1="560" y1="306" x2="450" y2="336" stroke="#1A1A1A" stroke-width="0.75" marker-end="url(#arr)"/>
+        <text x="445" y="324" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A5A55">just activate</text>
+
+        <!-- 2b -> 3c (right) -->
+        <line x1="640" y1="306" x2="660" y2="336" stroke="#1A1A1A" stroke-width="0.75" marker-end="url(#arr)"/>
+        <text x="675" y="324" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A5A55">try codes</text>
+
+        <!-- State 3a -->
+        <g>
+          <rect x="100" y="340" width="200" height="50" rx="4" fill="#E8F4EE" stroke="#00875A" stroke-width="0.75"/>
+          <text x="200" y="360" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#00875A" letter-spacing="0.04em">STATE 3A</text>
+          <text x="200" y="378" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#1A1A1A">Rewards activated</text>
+        </g>
+
+        <!-- State 3b -->
+        <g>
+          <rect x="350" y="340" width="200" height="50" rx="4" fill="#E8F4EE" stroke="#00875A" stroke-width="0.75"/>
+          <text x="450" y="360" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#00875A" letter-spacing="0.04em">STATE 3B</text>
+          <text x="450" y="378" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#1A1A1A">Rewards activated (skipped codes)</text>
+        </g>
+
+        <!-- State 3c -->
+        <g>
+          <rect x="600" y="340" width="160" height="50" rx="4" fill="#E8F0F5" stroke="#004977" stroke-width="0.75"/>
+          <text x="680" y="360" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#004977" letter-spacing="0.04em">STATE 3C</text>
+          <text x="680" y="378" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#1A1A1A">Testing codes</text>
+        </g>
+
+        <!-- 3c -> decision -->
+        <line x1="680" y1="390" x2="680" y2="416" stroke="#1A1A1A" stroke-width="0.75" marker-end="url(#arr)"/>
+
+        <!-- Decision: code worked? -->
+        <g>
+          <polygon points="600,418 760,418 780,446 760,474 600,474 580,446" fill="white" stroke="#1A1A1A" stroke-width="0.75"/>
+          <text x="680" y="450" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#1A1A1A">Any code worked?</text>
+        </g>
+
+        <line x1="585" y1="460" x2="490" y2="490" stroke="#1A1A1A" stroke-width="0.75" marker-end="url(#arr)"/>
+        <text x="525" y="478" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A5A55">yes</text>
+
+        <line x1="775" y1="460" x2="775" y2="490" stroke="#1A1A1A" stroke-width="0.75" marker-end="url(#arr)"/>
+        <text x="755" y="478" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A5A55">no</text>
+
+        <!-- State 4a -->
+        <g>
+          <rect x="370" y="492" width="200" height="50" rx="4" fill="#E8F4EE" stroke="#00875A" stroke-width="0.75"/>
+          <text x="470" y="512" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#00875A" letter-spacing="0.04em">STATE 4A</text>
+          <text x="470" y="530" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#1A1A1A">Code + rewards win</text>
+        </g>
+
+        <!-- State 4b -->
+        <g>
+          <rect x="670" y="492" width="160" height="50" rx="4" fill="#FBF1E0" stroke="#B87333" stroke-width="0.75"/>
+          <text x="750" y="512" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#B87333" letter-spacing="0.04em">STATE 4B</text>
+          <text x="750" y="530" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#1A1A1A">Codes failed, rewards apply</text>
+        </g>
+
+        <!-- All paths converge to State 5 -->
+        <line x1="200" y1="390" x2="200" y2="568" stroke="#1A1A1A" stroke-width="0.75" marker-end="url(#arr)"/>
+        <line x1="450" y1="390" x2="380" y2="568" stroke="#1A1A1A" stroke-width="0.75" marker-end="url(#arr)"/>
+        <line x1="470" y1="542" x2="450" y2="568" stroke="#1A1A1A" stroke-width="0.75" marker-end="url(#arr)"/>
+        <line x1="750" y1="542" x2="650" y2="568" stroke="#1A1A1A" stroke-width="0.75" marker-end="url(#arr)"/>
+
+        <!-- State 5 -> 6 -->
+        <g>
+          <rect x="100" y="570" width="700" height="40" rx="4" fill="#F5F4EF" stroke="#1A1A1A" stroke-width="0.75"/>
+          <text x="120" y="588" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A5A55" letter-spacing="0.04em">STATE 5 · CHECKOUT PIN</text>
+          <text x="120" y="602" font-family="Inter, sans-serif" font-size="12" fill="#1A1A1A">minimal corner pin reassures during payment</text>
+          <text x="680" y="588" font-family="JetBrains Mono, monospace" font-size="10" fill="#5A5A55" letter-spacing="0.04em" text-anchor="end">→ STATE 6</text>
+          <text x="780" y="602" font-family="Inter, sans-serif" font-size="12" fill="#1A1A1A" text-anchor="end">post-purchase confirmation</text>
+        </g>
+
+        <!-- Dismissal indicator -->
+        <text x="50" y="148" font-family="JetBrains Mono, monospace" font-size="9" fill="#9A958A" letter-spacing="0.04em">X DISMISS · ANY STATE WITH X →</text>
+        <text x="50" y="160" font-family="JetBrains Mono, monospace" font-size="9" fill="#9A958A" letter-spacing="0.04em">EDGE TAB PERSISTS FOR SESSION</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- — STATE 1 — -->
+  <section id="s1">
+    <h2><span class="num">§ 03</span>State 1 · First paint</h2>
+    <div class="state">
+      <div class="canvas">
+        <div class="notif">
+          <div class="notif-header">
+            <div class="logo-placeholder">LOGO</div>
+            <div class="x">×</div>
+          </div>
+          <div class="eyebrow-text">Earn rewards on this order</div>
+          <div class="hero-amount">$3.64 back</div>
+          <div class="subline">2% on your $182 Sephora cart <span class="excl-link">Exclusions apply ⓘ</span></div>
+          <button class="btn btn-primary">Activate rewards</button>
+          <div class="divider"></div>
+          <div class="loading-row">
+            <div class="spinner"></div>
+            <div>Checking for codes…</div>
+          </div>
+        </div>
+      </div>
+      <div class="info">
+        <h3>The opening move.</h3>
+        <p>Rewards is the entire pitch. The codes search runs in parallel, hedged with language designed not to promise anything that might not arrive.</p>
+        <dl class="state-meta">
+          <dt>Trigger</dt><dd>URL match on cart/checkout, ~100ms</dd>
+          <dt>Dismiss</dt><dd>X (edge tab persists)</dd>
+          <dt>Disclosure</dt><dd>Tooltip link beside cart line</dd>
+        </dl>
+        <div class="actions">
+          <h4>Available transitions</h4>
+          <ul>
+            <li>Activate rewards <span class="arrow">→</span> State 3a</li>
+            <li>Codes resolve <span class="arrow">→</span> State 2b</li>
+            <li>Codes timeout (5s) <span class="arrow">→</span> State 2a</li>
+            <li>× <span class="arrow">→</span> dismissed</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- — STATE 2A — -->
+  <section id="s2a">
+    <h2><span class="num">§ 04</span>State 2a · Rewards-only settled</h2>
+    <div class="state">
+      <div class="canvas">
+        <div class="notif">
+          <div class="notif-header">
+            <div class="logo-placeholder">LOGO</div>
+            <div class="lifetime">
+              <span class="amount">$792</span>
+              <span class="label">Lifetime Savings</span>
+            </div>
+          </div>
+          <div class="eyebrow-text">Earn rewards on this order</div>
+          <div class="hero-amount">$3.64 back</div>
+          <div class="subline">2% on your $182 Sephora cart <span class="excl-link">Exclusions apply ⓘ</span></div>
+          <div class="card">
+            <div class="card-content">
+              <div class="live-dot"></div>
+              <div style="font-size:11px;line-height:1.4;"><strong>1,842 shoppers</strong> activated at Sephora today</div>
+            </div>
+          </div>
+          <button class="btn btn-primary">Activate rewards</button>
+          <button class="btn btn-ghost">Not this time</button>
+        </div>
+      </div>
+      <div class="info">
+        <h3>Settled into a clean rewards pitch.</h3>
+        <p>The "Checking for codes…" footer fades; the social proof card slides up to replace it. The header X is replaced with Lifetime Savings via a 200ms crossfade.</p>
+        <dl class="state-meta">
+          <dt>Trigger</dt><dd>Codes search ended (no results or 5s timeout)</dd>
+          <dt>Header</dt><dd>Lifetime Savings replaces X</dd>
+          <dt>Disclosure</dt><dd>Tooltip link</dd>
+        </dl>
+        <div class="actions">
+          <h4>Available transitions</h4>
+          <ul>
+            <li>Activate rewards <span class="arrow">→</span> State 3a</li>
+            <li>Not this time <span class="arrow">→</span> dismissed</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- — STATE 2B — -->
+  <section id="s2b">
+    <h2><span class="num">§ 05</span>State 2b · Codes also ready</h2>
+    <div class="state">
+      <div class="canvas">
+        <div class="notif">
+          <div class="notif-header">
+            <div class="logo-placeholder">LOGO</div>
+            <div class="x">×</div>
+          </div>
+          <div class="eyebrow-text">Earn rewards on this order</div>
+          <div class="hero-amount">$3.64 back</div>
+          <div class="subline">2% on your $182 Sephora cart <span class="excl-link">Exclusions apply ⓘ</span></div>
+          <div class="card card-accent">
+            <div class="card-content">
+              <div class="card-icon">🏷</div>
+              <div class="card-text">
+                <div class="card-title">5 codes also ready</div>
+                <div class="card-sub">3,427 saved here today</div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary">Try codes + activate rewards</button>
+          <button class="btn btn-secondary">Just activate rewards</button>
+        </div>
+      </div>
+      <div class="info">
+        <h3>Codes arrive as an addition, not a replacement.</h3>
+        <p>The codes card slides in below rewards with a 200ms drop animation. A green left-border accent fades in for ~2 seconds to draw the eye. The primary CTA upgrades to combined action; the secondary preserves the "just rewards" path for fast users.</p>
+        <dl class="state-meta">
+          <dt>Trigger</dt><dd>Codes resolved before timeout</dd>
+          <dt>Animation</dt><dd>Slide-down with slight overshoot</dd>
+          <dt>Accent</dt><dd>Green border, fades after 2s</dd>
+        </dl>
+        <div class="actions">
+          <h4>Available transitions</h4>
+          <ul>
+            <li>Try codes + activate <span class="arrow">→</span> State 3c</li>
+            <li>Just activate rewards <span class="arrow">→</span> State 3b</li>
+            <li>× <span class="arrow">→</span> dismissed</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- — STATE 3A/3B — -->
+  <section id="s3ab">
+    <h2><span class="num">§ 06</span>State 3a/3b · Rewards activated</h2>
+    <div class="state">
+      <div class="canvas">
+        <div class="notif">
+          <div class="notif-header">
+            <div class="logo-placeholder">LOGO</div>
+            <div class="lifetime">
+              <span class="strike">$792</span>
+              <span class="amount">$795.64</span>
+              <span class="label">Lifetime</span>
+            </div>
+          </div>
+          <div class="icon-success">
+            <div class="card-icon card-icon-success">✓</div>
+            <div class="icon-success-text">
+              <div class="title">Rewards activated</div>
+              <div class="sub">$3.64 will be credited after checkout</div>
+            </div>
+          </div>
+          <div class="card">
+            <div style="font-size:11px;color:var(--text-2);line-height:1.5;">We'll apply your 2% back automatically — nothing extra to do at checkout.</div>
+          </div>
+          <div class="disclosure"><strong>Exclusions apply:</strong> Not eligible for purchases of gift cards, or on orders deemed by Sephora to be for reseller activity.</div>
+          <button class="btn btn-outline">Continue to checkout</button>
+        </div>
+      </div>
+      <div class="info">
+        <h3>The dopamine moment.</h3>
+        <p>Lifetime Savings ticks from $792 → $795.64 over ~1.2 seconds. The old value briefly stays crossed out to emphasize the jump. Exclusions are now shown inline above the CTA — at this point the user has committed, so disclosure must be visible.</p>
+        <dl class="state-meta">
+          <dt>Trigger</dt><dd>Activate rewards clicked (3a) or Just activate (3b)</dd>
+          <dt>Animation</dt><dd>Lifetime tick-up, 1.2s ease-out</dd>
+          <dt>Auto-collapse</dt><dd>To pin after 4s</dd>
+        </dl>
+        <div class="actions">
+          <h4>Available transitions</h4>
+          <ul>
+            <li>Continue to checkout <span class="arrow">→</span> State 5</li>
+            <li>Auto-collapse (4s) <span class="arrow">→</span> pin remains</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- — STATE 3C — -->
+  <section id="s3c">
+    <h2><span class="num">§ 07</span>State 3c · Testing codes</h2>
+    <div class="state">
+      <div class="canvas">
+        <div class="notif">
+          <div class="notif-header">
+            <div class="logo-placeholder">LOGO</div>
+            <div class="lifetime">
+              <span class="amount">$792</span>
+              <span class="label">Lifetime Savings</span>
+            </div>
+          </div>
+          <div class="card" style="margin-bottom:12px;">
+            <div class="card-content">
+              <div class="spinner" style="width:20px;height:20px;"></div>
+              <div class="card-text">
+                <div class="card-title">Testing code 2 of 5…</div>
+                <div class="card-sub">Usually ~2 seconds</div>
+              </div>
+            </div>
+          </div>
+          <div class="code-list">
+            <div class="code-row tested">
+              <span class="check">✓</span>
+              <span class="label">BROWSHADE</span>
+              <span class="meta">tested</span>
+            </div>
+            <div class="code-row testing">
+              <div class="spinner-sm"></div>
+              <span class="label">HAIRYOUTH</span>
+            </div>
+            <div class="code-row pending">
+              <div class="empty-dot"></div>
+              <span class="label">FRESHLOOK</span>
+            </div>
+            <div class="code-row pending">
+              <div class="empty-dot"></div>
+              <span class="label">BEAUTY10</span>
+            </div>
+            <div class="code-row pending">
+              <div class="empty-dot"></div>
+              <span class="label">SPRING25</span>
+            </div>
+          </div>
+          <div class="footer-locked">
+            <span class="check">✓</span>
+            <div><strong>$3.64 rewards</strong> already locked in</div>
+          </div>
+        </div>
+      </div>
+      <div class="info">
+        <h3>Showing the work, holding the floor.</h3>
+        <p>The header shifts to Lifetime Savings — the X is gone because the activate decision was already made. Codes tick green one-by-one as each is tested. The footer is the safety net: rewards are already locked in regardless of what codes do.</p>
+        <dl class="state-meta">
+          <dt>Trigger</dt><dd>Try codes + activate rewards clicked</dd>
+          <dt>Activation</dt><dd>Happens silently in background</dd>
+          <dt>Code reveal</dt><dd>80ms scale + green wash per code</dd>
+        </dl>
+        <div class="actions">
+          <h4>Available transitions</h4>
+          <ul>
+            <li>Any code works <span class="arrow">→</span> State 4a</li>
+            <li>All codes fail <span class="arrow">→</span> State 4b</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- — STATE 4A — -->
+  <section id="s4a">
+    <h2><span class="num">§ 08</span>State 4a · Code + rewards win</h2>
+    <div class="state">
+      <div class="canvas">
+        <div class="notif">
+          <div class="notif-header">
+            <div class="logo-placeholder">LOGO</div>
+            <div class="lifetime">
+              <span class="strike">$792</span>
+              <span class="amount">$813.48</span>
+              <span class="label">Lifetime</span>
+            </div>
+          </div>
+          <div class="icon-success">
+            <div class="card-icon card-icon-success">✓</div>
+            <div class="icon-success-text">
+              <div class="title">You're all set</div>
+              <div class="sub">Two ways saved at Sephora</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="receipt-row">
+              <div class="label-block">
+                <div class="label">Code applied</div>
+                <div class="code">BROWSHADE</div>
+              </div>
+              <div class="amount negative">−$18.20</div>
+            </div>
+            <div class="divider-tight">
+              <div class="receipt-row">
+                <div class="label-block">
+                  <div class="label">Rewards activated</div>
+                  <div class="code">2% on this order</div>
+                </div>
+                <div class="amount positive">+$3.28</div>
+              </div>
+            </div>
+          </div>
+          <div class="disclosure"><strong>Exclusions apply:</strong> Not eligible for purchases of gift cards, or on orders deemed by Sephora to be for reseller activity.</div>
+          <button class="btn btn-outline">Continue to checkout</button>
+        </div>
+      </div>
+      <div class="info">
+        <h3>The double win, itemized.</h3>
+        <p>Lifetime Savings ticks dramatically: $792 → $813.48 (combined code + rewards). The receipt format shows both wins as separate line items so the user understands exactly what they got from each path.</p>
+        <dl class="state-meta">
+          <dt>Trigger</dt><dd>Any code worked AND rewards activated</dd>
+          <dt>Lifetime delta</dt><dd>+$21.48 (combined)</dd>
+          <dt>Auto-collapse</dt><dd>To pin after 4s</dd>
+        </dl>
+        <div class="actions">
+          <h4>Available transitions</h4>
+          <ul>
+            <li>Continue to checkout <span class="arrow">→</span> State 5</li>
+            <li>Auto-collapse (4s) <span class="arrow">→</span> +$21.48 ready pin</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- — STATE 4B — -->
+  <section id="s4b">
+    <h2><span class="num">§ 09</span>State 4b · Codes failed, rewards still apply</h2>
+    <div class="state">
+      <div class="canvas">
+        <div class="notif">
+          <div class="notif-header">
+            <div class="logo-placeholder">LOGO</div>
+            <div class="lifetime">
+              <span class="strike">$792</span>
+              <span class="amount">$795.64</span>
+              <span class="label">Lifetime</span>
+            </div>
+          </div>
+          <div class="icon-success">
+            <div class="card-icon card-icon-success">✓</div>
+            <div class="icon-success-text">
+              <div class="title">Rewards activated</div>
+              <div class="sub">No codes worked this time, but $3.64 is yours</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="receipt-row">
+              <div class="label-block">
+                <div class="label">Rewards on this order</div>
+                <div class="code">2% back, credited after checkout</div>
+              </div>
+              <div class="amount positive">+$3.64</div>
+            </div>
+          </div>
+          <p style="font-size:11px;color:var(--text-3);margin:0 4px 12px;line-height:1.5;">We tested all 5 codes — none applied to your cart this time.</p>
+          <div class="disclosure"><strong>Exclusions apply:</strong> Not eligible for purchases of gift cards, or on orders deemed by Sephora to be for reseller activity.</div>
+          <button class="btn btn-outline">Continue to checkout</button>
+        </div>
+      </div>
+      <div class="info">
+        <h3>Honesty without apology.</h3>
+        <p>"No codes worked this time, but $3.64 is yours" — acknowledge the miss, immediately reframe to the win. Lifetime Savings still ticks because even the failure path delivers value. "This time" phrasing leaves room for future success without promising anything.</p>
+        <dl class="state-meta">
+          <dt>Trigger</dt><dd>All codes tested, none applied</dd>
+          <dt>Tone</dt><dd>Factual, no apology, immediate reframe</dd>
+          <dt>Auto-collapse</dt><dd>To rewards-only pin after 4s</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- — STATE 5 — -->
+  <section id="s5">
+    <h2><span class="num">§ 10</span>State 5 · Checkout pin</h2>
+    <div class="state">
+      <div class="canvas" style="flex-direction:column;align-items:flex-start;gap:24px;display:flex;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-3);margin-bottom:8px;letter-spacing:0.08em;">AFTER 4A (CODE + REWARDS)</div>
+          <div class="pin">
+            <span class="check">✓</span>
+            <span>$18.20 off applied</span>
+            <span class="sub">+ $3.28 back</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-3);margin-bottom:8px;letter-spacing:0.08em;">AFTER 3A / 3B / 4B (REWARDS ONLY)</div>
+          <div class="pin">
+            <span class="check">✓</span>
+            <span>$3.64 back ready</span>
+          </div>
+        </div>
+      </div>
+      <div class="info">
+        <h3>Stay visible, stay quiet.</h3>
+        <p>The extension's footprint shrinks dramatically during checkout — from a ~320px panel to a ~32px pill. No CTA, no decision. Pure reassurance, designed to let the merchant's checkout flow take center stage.</p>
+        <dl class="state-meta">
+          <dt>Trigger</dt><dd>User enters checkout funnel</dd>
+          <dt>Adaptive content</dt><dd>Code + rewards or rewards only</dd>
+          <dt>Position</dt><dd>Corner pin, ~32px tall</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- — STATE 6 — -->
+  <section id="s6">
+    <h2><span class="num">§ 11</span>State 6 · Post-purchase confirmation</h2>
+    <div class="state">
+      <div class="canvas">
+        <div class="notif">
+          <div class="notif-header">
+            <div class="logo-placeholder">LOGO</div>
+            <div class="lifetime">
+              <span class="amount">$813.48</span>
+              <span class="label">Lifetime Savings</span>
+            </div>
+          </div>
+          <div style="font-size:14px;font-weight:500;margin-bottom:12px;">Nice — here's what you got</div>
+          <div class="card" style="padding:10px 14px;">
+            <div class="receipt-row">
+              <div style="font-size:12px;">Code applied at checkout</div>
+              <div class="amount negative">−$18.20</div>
+            </div>
+          </div>
+          <div class="card" style="padding:10px 14px;">
+            <div class="receipt-row">
+              <div class="label-block">
+                <div class="label">2% rewards earned</div>
+                <div class="code" style="font-family:inherit;">Available in ~30 days</div>
+              </div>
+              <div class="amount positive">+$3.28</div>
+            </div>
+          </div>
+          <div style="border-top:0.5px solid var(--border);padding-top:12px;margin-top:4px;margin-bottom:12px;">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;">
+              <div style="font-size:12px;color:var(--text-2);">Saved on this order</div>
+              <div style="font-size:18px;font-weight:500;color:var(--navy);">$21.48</div>
+            </div>
+          </div>
+          <button class="btn btn-outline">See all my savings</button>
+        </div>
+      </div>
+      <div class="info">
+        <h3>Closing the loop.</h3>
+        <p>This is the most underused moment in shopping extensions. Most go silent post-purchase, leaving users unsure if rewards applied. We do the opposite — itemize the win, surface the delayed-availability rewards, and pull users toward broader platform engagement.</p>
+        <dl class="state-meta">
+          <dt>Trigger</dt><dd>Order confirmation page</dd>
+          <dt>Purpose</dt><dd>Loyalty + retention + cross-sell</dd>
+          <dt>CTA</dt><dd>Bridge into broader Capital One Shopping platform</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- — IMPLEMENTATION — -->
+  <section id="implementation">
+    <h2><span class="num">§ 12</span>Implementation notes</h2>
+
+    <h3>Design tokens · Colors</h3>
+    <table>
+      <thead><tr><th>Token</th><th>Hex</th><th>Use</th></tr></thead>
+      <tbody>
+        <tr><td><span class="swatch"><span class="swatch-chip" style="background:#004977"></span>Primary navy</span></td><td><code>#004977</code></td><td>Primary CTAs, hero numbers, brand accent</td></tr>
+        <tr><td><span class="swatch"><span class="swatch-chip" style="background:#D03027"></span>Brand red</span></td><td><code>#D03027</code></td><td>Logo only — not used as button fill</td></tr>
+        <tr><td><span class="swatch"><span class="swatch-chip" style="background:#00875A"></span>Success green</span></td><td><code>#00875A</code></td><td>Success indicators, rewards amounts</td></tr>
+        <tr><td><span class="swatch"><span class="swatch-chip" style="background:#E0F2EB"></span>Success bg</span></td><td><code>#E0F2EB</code></td><td>Success icon backgrounds</td></tr>
+        <tr><td><span class="swatch"><span class="swatch-chip" style="background:#0066CC"></span>Lifetime blue</span></td><td><code>#0066CC</code></td><td>Lifetime Savings number</td></tr>
+        <tr><td><span class="swatch"><span class="swatch-chip" style="background:#F5F4EF"></span>Surface</span></td><td><code>#F5F4EF</code></td><td>Inline content cards</td></tr>
+        <tr><td><span class="swatch"><span class="swatch-chip" style="background:#E5E4DF"></span>Border</span></td><td><code>#E5E4DF</code></td><td>Card borders, dividers</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Typography</h3>
+    <table>
+      <thead><tr><th>Size · Weight</th><th>Use</th></tr></thead>
+      <tbody>
+        <tr><td><code>22–26px / 500</code></td><td>Hero numbers (savings amounts)</td></tr>
+        <tr><td><code>14px / 500</code></td><td>State headlines</td></tr>
+        <tr><td><code>13px / 500</code></td><td>Primary CTA buttons</td></tr>
+        <tr><td><code>12–13px / 400</code></td><td>Supporting copy</td></tr>
+        <tr><td><code>11px / 400</code></td><td>Trust signals, metadata</td></tr>
+        <tr><td><code>10px / 400</code></td><td>Disclosures, fine print</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Animation tokens</h3>
+    <table>
+      <thead><tr><th>Element</th><th>Duration</th><th>Easing</th></tr></thead>
+      <tbody>
+        <tr><td>Lifetime Savings tick-up</td><td>1.2s</td><td>ease-out</td></tr>
+        <tr><td>Codes card slide-down (State 2b)</td><td>200ms</td><td>ease-out, slight overshoot</td></tr>
+        <tr><td>Header crossfade (X ↔ Lifetime)</td><td>200ms</td><td>ease-in-out</td></tr>
+        <tr><td>Code list checkmark reveal</td><td>80ms</td><td>scale + green wash</td></tr>
+        <tr><td>Panel auto-collapse to pin</td><td>180ms</td><td>scale + fade</td></tr>
+        <tr><td>Toast slide-in</td><td>240ms</td><td>ease-out from above</td></tr>
+        <tr><td>Tooltip reveal</td><td>150ms delay, 120ms fade</td><td>ease-out</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Timing rules</h3>
+    <ul>
+      <li><strong>Codes search timeout:</strong> 5 seconds. Beyond this, transition to State 2a.</li>
+      <li><strong>Success state auto-collapse:</strong> 4 seconds. Pin remains visible for the session.</li>
+      <li><strong>Green accent line on State 2b codes card:</strong> Fade after 2–3 seconds.</li>
+      <li><strong>Edge tab persistence:</strong> After X dismissal, edge tab persists for the rest of the session; resets next visit.</li>
+    </ul>
+
+    <h3>Low-volume merchant fallback</h3>
+    <p>If the today-activation count in State 2a's social proof card is below 50, swap to brand-level proof: <em>"12M+ members earn rewards with Capital One Shopping."</em> The flow stays identical; only the content card changes. Threshold and fallback content should be configurable per merchant tier.</p>
+
+    <h3>Exclusions disclosure rules</h3>
+    <ul>
+      <li><strong>States 1, 2a, 2b (pre-decision):</strong> Inline tooltip link beside the cart-amount line. Dotted underline + info icon. Renders on hover (desktop) or tap (mobile).</li>
+      <li><strong>States 3a, 3b, 4a, 4b (activated):</strong> Inline disclosure text above "Continue to checkout." Uses tertiary text color at 10–11px. "Exclusions apply:" prefix bolded for scannability.</li>
+      <li><strong>State 5 (checkout pin):</strong> No disclosure — activated states already showed it.</li>
+      <li><strong>State 6 (post-purchase):</strong> Pending legal review.</li>
+    </ul>
+    <p>Exclusion text is configurable per merchant via the rewards-API response. Default fallback: <em>"Some product exclusions may apply."</em></p>
+
+    <h3>Telemetry priorities</h3>
+    <p>Track state-to-state transitions, not just clicks. The interesting funnel questions:</p>
+    <ul>
+      <li>What % of users reaching State 1 reach State 3 (any activation)?</li>
+      <li>What % of users at State 2b try codes vs just activate rewards?</li>
+      <li>What % of code-testing sessions reach State 4a vs 4b?</li>
+      <li>What % of activations reach State 6 (closed loop)?</li>
+    </ul>
+  </section>
+
+  <!-- — QUESTIONS — -->
+  <section id="questions">
+    <h2><span class="num">§ 13</span>Open questions</h2>
+
+    <div class="questions">
+      <div class="question">
+        <div class="who">For legal review</div>
+        <ol>
+          <li>Does the State 1 tooltip-only disclosure satisfy regulatory requirements at the moment of value claim, or does full exclusions text need to be inline?</li>
+          <li>Should the post-purchase confirmation state (State 6) also include the exclusions disclosure? The order is final at that point, which may change the disclosure standard.</li>
+          <li>For merchants with exclusions text longer than ~3 lines, do we need a "See full exclusions" overlay pattern?</li>
+        </ol>
+      </div>
+
+      <div class="question">
+        <div class="who">For data infrastructure</div>
+        <ol>
+          <li>The State 2a social proof count needs a source of truth that updates at least once daily. Can the data team produce this per-merchant?</li>
+          <li>The low-volume fallback threshold (currently 50) should be validated against real data — what's the actual distribution of daily activations per merchant?</li>
+        </ol>
+      </div>
+
+      <div class="question">
+        <div class="who">For engineering</div>
+        <ol>
+          <li>Edge tab implementation — is one-session persistence the right window, or should it expire faster / slower?</li>
+          <li>Do we have telemetry capable of tracking state-to-state transitions, not just clicks?</li>
+          <li>Pre-engagement scenario: user clicks "Activate rewards" in State 1 before codes finish loading. Does the system gracefully handle in-flight codes search?</li>
+        </ol>
+      </div>
+
+      <div class="question">
+        <div class="who">For design follow-up</div>
+        <ol>
+          <li>Mobile-specific tooltip behavior — tap to toggle, but what's the dismissal pattern when the user is mid-tooltip?</li>
+          <li>Should State 2b's X swap to Lifetime Savings if the user has been viewing for 10+ seconds, or stay consistent with State 1?</li>
+          <li>The "See all my savings" CTA in State 6 — what page does this open? Opportunity to design the bridge into broader platform engagement.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <footer style="margin-top:120px;padding-top:32px;border-top:0.5px solid var(--text-1);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-3);letter-spacing:0.04em;display:flex;justify-content:space-between;">
+    <div>Document v1 · Cart notification redesign</div>
+    <div>For design review</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
