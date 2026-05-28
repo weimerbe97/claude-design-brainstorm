@@ -1,0 +1,31 @@
+<svg width="920" height="270" viewBox="0 0 920 270" xmlns="http://www.w3.org/2000/svg">
+<title>Test 2 - Add social proof</title>
+<rect width="920" height="270" fill="#FAFAF6"/>
+<rect x="114.0" y="24" width="100" height="18" rx="9" fill="#E5E4DF"/>
+<text x="164.0" y="37" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" font-weight="500" fill="#5A5A55" letter-spacing="1">CONTROL</text>
+<text x="164.0" y="58" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#1A1A1A">Test 1 winner</text>
+<rect x="24" y="60" width="280" height="186" rx="12" fill="#FFFFFF" stroke="#E5E4DF" stroke-width="0.5"/>
+<rect x="38" y="74" width="32" height="16" rx="2" fill="#E5E4DF"/>
+<text x="54" y="84" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#999" letter-spacing="0.6">LOGO</text>
+<text x="290" y="86" text-anchor="end" font-family="Inter, -apple-system, sans-serif" font-size="18" fill="#9A958A">×</text><text x="164.0" y="132" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#1A1A1A">SEPHORA</text><text x="38" y="166" font-family="Inter, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#1A1A1A">5 codes ready to try</text><text x="38" y="182" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#5A5A55">Tested in ~2 seconds</text><rect x="38" y="198" width="252" height="36" rx="18" fill="#004977"/><text x="164.0" y="220" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#FFFFFF">Try codes</text><rect x="38" y="244" width="252" height="36" rx="18" fill="#FFFFFF" stroke="#E5E4DF" stroke-width="0.5"/><text x="164.0" y="266" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#004977">Activate 2% back instead</text>
+<text x="460.0" y="37" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" font-weight="500" fill="#004977" letter-spacing="1">VARIANT A</text>
+<text x="460.0" y="58" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#1A1A1A">Daily activity count</text>
+<rect x="320" y="60" width="280" height="186" rx="12" fill="#FFFFFF" stroke="#E5E4DF" stroke-width="0.5"/>
+<rect x="334" y="74" width="32" height="16" rx="2" fill="#E5E4DF"/>
+<text x="350" y="84" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#999" letter-spacing="0.6">LOGO</text>
+<text x="586" y="86" text-anchor="end" font-family="Inter, -apple-system, sans-serif" font-size="18" fill="#9A958A">×</text><text x="460.0" y="132" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#1A1A1A">SEPHORA</text><text x="334" y="166" font-family="Inter, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#1A1A1A">5 codes ready to try</text><rect x="334" y="186" width="252" height="40" rx="8" fill="#F5F4EF"/>
+<circle cx="350" cy="206.0" r="4" fill="#00875A"/>
+<circle cx="350" cy="206.0" r="7" fill="#00875A" fill-opacity="0.25"/>
+<text x="368" y="204.0" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#1A1A1A">1,842 shoppers saved</text>
+<text x="368" y="218.0" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#1A1A1A">at Sephora today</text><rect x="334" y="238" width="252" height="36" rx="18" fill="#004977"/><text x="460.0" y="260" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#FFFFFF">Try codes</text>
+<text x="756.0" y="37" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" font-weight="500" fill="#004977" letter-spacing="1">VARIANT B</text>
+<text x="756.0" y="58" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#1A1A1A">Average savings</text>
+<rect x="616" y="60" width="280" height="186" rx="12" fill="#FFFFFF" stroke="#E5E4DF" stroke-width="0.5"/>
+<rect x="630" y="74" width="32" height="16" rx="2" fill="#E5E4DF"/>
+<text x="646" y="84" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#999" letter-spacing="0.6">LOGO</text>
+<text x="882" y="86" text-anchor="end" font-family="Inter, -apple-system, sans-serif" font-size="18" fill="#9A958A">×</text><text x="756.0" y="132" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#1A1A1A">SEPHORA</text><text x="630" y="166" font-family="Inter, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#1A1A1A">5 codes ready to try</text><rect x="630" y="186" width="252" height="40" rx="8" fill="#F5F4EF"/>
+<circle cx="646" cy="206.0" r="4" fill="#00875A"/>
+<circle cx="646" cy="206.0" r="7" fill="#00875A" fill-opacity="0.25"/>
+<text x="664" y="204.0" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#1A1A1A">Sephora shoppers save</text>
+<text x="664" y="218.0" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#1A1A1A">$14.80 on average</text><rect x="630" y="238" width="252" height="36" rx="18" fill="#004977"/><text x="756.0" y="260" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#FFFFFF">Try codes</text>
+</svg>
