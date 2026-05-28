@@ -1,0 +1,26 @@
+<svg width="400" height="360" viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg">
+  <title>State 2a - Rewards-only settled</title>
+  <rect width="400" height="360" fill="#FAFAF6"/>
+  <g id="notification-card">
+    <rect x="40" y="20" width="320" height="320" rx="12" fill="#FFFFFF" stroke="#E5E4DF" stroke-width="0.5"/>
+<g id="logo">
+<rect x="56" y="36" width="32" height="16" rx="2" fill="#E5E4DF"/>
+<text x="72" y="47" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#999999" letter-spacing="0.6">LOGO</text>
+</g>
+<g id="lifetime">
+<text x="344" y="46" text-anchor="end" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#0066CC">$792</text>
+<text x="344" y="58" text-anchor="end" font-family="Inter, -apple-system, sans-serif" font-size="10" fill="#5A5A55">Lifetime Savings</text>
+</g>
+<text x="56" y="92" font-family="Inter, -apple-system, sans-serif" font-size="12" fill="#5A5A55">Earn rewards on this order</text>
+<text x="56" y="124" font-family="Inter, -apple-system, sans-serif" font-size="26" font-weight="500" fill="#004977">$3.64 back</text>
+<text x="56" y="148" font-family="Inter, -apple-system, sans-serif" font-size="12" fill="#5A5A55">2% on your $182 Sephora cart</text>
+<text x="218" y="148" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#5A5A55" text-decoration="underline">Exclusions apply &#9432;</text>
+<rect x="56" y="168" width="288" height="40" rx="8" fill="#F5F4EF"/>
+<circle cx="74" cy="188" r="4" fill="#00875A"/>
+<circle cx="74" cy="188" r="7" fill="#00875A" fill-opacity="0.25"/>
+<text x="92" y="184" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#1A1A1A"><tspan font-weight="600">1,842 shoppers</tspan> activated</text>
+<text x="92" y="198" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#1A1A1A">at Sephora today</text>
+<g id="btn-primary"><rect x="56" y="226" width="288" height="40" rx="20" fill="#004977"/><text x="200.0" y="251" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#FFFFFF">Activate rewards</text></g>
+<g id="btn-ghost"><text x="200.0" y="302" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" fill="#5A5A55">Not this time</text></g>
+  </g>
+</svg>

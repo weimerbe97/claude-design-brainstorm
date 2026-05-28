@@ -1,0 +1,24 @@
+<svg width="400" height="380" viewBox="0 0 400 380" xmlns="http://www.w3.org/2000/svg">
+  <title>State 2b - Codes also ready</title>
+  <rect width="400" height="380" fill="#FAFAF6"/>
+  <g id="notification-card">
+    <rect x="40" y="20" width="320" height="340" rx="12" fill="#FFFFFF" stroke="#E5E4DF" stroke-width="0.5"/>
+<g id="logo">
+<rect x="56" y="36" width="32" height="16" rx="2" fill="#E5E4DF"/>
+<text x="72" y="47" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#999999" letter-spacing="0.6">LOGO</text>
+</g>
+<text id="dismiss-x" x="344" y="50" text-anchor="end" font-family="Inter, -apple-system, sans-serif" font-size="18" fill="#9A958A">×</text>
+<text x="56" y="86" font-family="Inter, -apple-system, sans-serif" font-size="12" fill="#5A5A55">Earn rewards on this order</text>
+<text x="56" y="118" font-family="Inter, -apple-system, sans-serif" font-size="26" font-weight="500" fill="#004977">$3.64 back</text>
+<text x="56" y="142" font-family="Inter, -apple-system, sans-serif" font-size="12" fill="#5A5A55">2% on your $182 Sephora cart</text>
+<text x="218" y="142" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#5A5A55" text-decoration="underline">Exclusions apply &#9432;</text>
+<rect x="56" y="162" width="288" height="56" rx="8" fill="#F5F4EF"/>
+<rect x="56" y="162" width="2" height="56" rx="1" fill="#00875A"/>
+<circle cx="84" cy="190" r="14" fill="#FFFFFF"/>
+<text x="84" y="195" text-anchor="middle" font-size="13">&#127991;</text>
+<text x="108" y="186" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#1A1A1A">5 codes also ready</text>
+<text x="108" y="202" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#5A5A55">3,427 saved here today</text>
+<g id="btn-primary"><rect x="56" y="234" width="288" height="40" rx="20" fill="#004977"/><text x="200.0" y="259" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#FFFFFF">Try codes + activate rewards</text></g>
+<g id="btn-secondary"><rect x="56" y="282" width="288" height="40" rx="20" fill="#FFFFFF" stroke="#E5E4DF" stroke-width="0.5"/><text x="200.0" y="307" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#004977">Just activate rewards</text></g>
+  </g>
+</svg>

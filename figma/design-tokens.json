@@ -1,0 +1,292 @@
+{
+  "$themes": [],
+  "$metadata": {
+    "tokenSetOrder": ["global"]
+  },
+  "global": {
+    "color": {
+      "navy": {
+        "value": "#004977",
+        "type": "color",
+        "description": "Primary brand color. Used for primary CTAs, hero savings numbers, and brand accents."
+      },
+      "red": {
+        "value": "#D03027",
+        "type": "color",
+        "description": "Brand red. Reserved for the logo only — never used as a button fill."
+      },
+      "green": {
+        "value": "#00875A",
+        "type": "color",
+        "description": "Success green. Used for success indicators, checkmarks, and rewards amounts."
+      },
+      "greenBg": {
+        "value": "#E0F2EB",
+        "type": "color",
+        "description": "Success background. Used behind success icons."
+      },
+      "blue": {
+        "value": "#0066CC",
+        "type": "color",
+        "description": "Lifetime Savings number color."
+      },
+      "surface": {
+        "value": "#F5F4EF",
+        "type": "color",
+        "description": "Inline content card backgrounds."
+      },
+      "border": {
+        "value": "#E5E4DF",
+        "type": "color",
+        "description": "Card borders and dividers."
+      },
+      "textPrimary": {
+        "value": "#1A1A1A",
+        "type": "color",
+        "description": "Headlines and primary copy."
+      },
+      "textSecondary": {
+        "value": "#5A5A55",
+        "type": "color",
+        "description": "Supporting copy."
+      },
+      "textTertiary": {
+        "value": "#9A958A",
+        "type": "color",
+        "description": "Disclosures and fine print."
+      },
+      "paper": {
+        "value": "#FFFFFF",
+        "type": "color",
+        "description": "Notification card background."
+      },
+      "artboard": {
+        "value": "#FAFAF6",
+        "type": "color",
+        "description": "Demo artboard background — not part of the notification itself."
+      },
+      "tooltipBg": {
+        "value": "#2C2C2A",
+        "type": "color",
+        "description": "Dark tooltip background for the exclusions popover."
+      }
+    },
+    "fontFamily": {
+      "base": {
+        "value": "Inter",
+        "type": "fontFamilies",
+        "description": "Primary UI typeface. System fallback: -apple-system, sans-serif."
+      },
+      "mono": {
+        "value": "JetBrains Mono",
+        "type": "fontFamilies",
+        "description": "Used for coupon codes and metadata labels."
+      }
+    },
+    "fontWeight": {
+      "regular": { "value": "400", "type": "fontWeights" },
+      "medium": { "value": "500", "type": "fontWeights" },
+      "semibold": { "value": "600", "type": "fontWeights" }
+    },
+    "fontSize": {
+      "hero": {
+        "value": "26",
+        "type": "fontSizes",
+        "description": "Hero savings amount (e.g. $3.64 back)."
+      },
+      "total": {
+        "value": "18",
+        "type": "fontSizes",
+        "description": "Order total on post-purchase."
+      },
+      "title": {
+        "value": "14",
+        "type": "fontSizes",
+        "description": "State headlines and success titles."
+      },
+      "amount": {
+        "value": "14",
+        "type": "fontSizes",
+        "description": "Receipt line amounts."
+      },
+      "body": {
+        "value": "13",
+        "type": "fontSizes",
+        "description": "Primary CTA button text, lifetime amount."
+      },
+      "supporting": {
+        "value": "12",
+        "type": "fontSizes",
+        "description": "Supporting copy, sublines, secondary buttons."
+      },
+      "meta": {
+        "value": "11",
+        "type": "fontSizes",
+        "description": "Trust signals, metadata, card subtext."
+      },
+      "fine": {
+        "value": "10",
+        "type": "fontSizes",
+        "description": "Disclosures, fine print, lifetime label."
+      },
+      "micro": {
+        "value": "7",
+        "type": "fontSizes",
+        "description": "Logo placeholder label."
+      }
+    },
+    "lineHeight": {
+      "tight": { "value": "1.1", "type": "lineHeights", "description": "Hero numbers." },
+      "snug": { "value": "1.4", "type": "lineHeights", "description": "Most UI text." },
+      "normal": { "value": "1.5", "type": "lineHeights", "description": "Disclosures and multi-line body." }
+    },
+    "letterSpacing": {
+      "label": {
+        "value": "0.12em",
+        "type": "letterSpacing",
+        "description": "Uppercase mono labels."
+      },
+      "logo": {
+        "value": "0.1em",
+        "type": "letterSpacing",
+        "description": "Logo placeholder text."
+      }
+    },
+    "borderRadius": {
+      "container": {
+        "value": "12",
+        "type": "borderRadius",
+        "description": "Notification card outer radius."
+      },
+      "card": {
+        "value": "8",
+        "type": "borderRadius",
+        "description": "Inline content cards."
+      },
+      "chip": {
+        "value": "6",
+        "type": "borderRadius",
+        "description": "Small chips and compact cards."
+      },
+      "pill": {
+        "value": "999",
+        "type": "borderRadius",
+        "description": "Buttons and pins (stadium shape)."
+      },
+      "tab": {
+        "value": "4",
+        "type": "borderRadius",
+        "description": "Code rows and small interactive elements."
+      }
+    },
+    "spacing": {
+      "cardPadding": {
+        "value": "16",
+        "type": "spacing",
+        "description": "Notification card inner padding."
+      },
+      "cardGap": {
+        "value": "14",
+        "type": "spacing",
+        "description": "Gap between major card sections."
+      },
+      "innerCardPadding": {
+        "value": "12",
+        "type": "spacing",
+        "description": "Padding inside inline content cards."
+      },
+      "buttonPadding": {
+        "value": "11",
+        "type": "spacing",
+        "description": "Vertical padding on primary buttons."
+      },
+      "elementGap": {
+        "value": "10",
+        "type": "spacing",
+        "description": "Gap between icon and text in card rows."
+      },
+      "tightGap": {
+        "value": "6",
+        "type": "spacing",
+        "description": "Gap between stacked buttons."
+      }
+    },
+    "sizing": {
+      "notificationWidth": {
+        "value": "320",
+        "type": "sizing",
+        "description": "Notification card width."
+      },
+      "successIcon": {
+        "value": "40",
+        "type": "sizing",
+        "description": "Success state circular icon."
+      },
+      "cardIcon": {
+        "value": "28",
+        "type": "sizing",
+        "description": "Circular icons inside content cards."
+      },
+      "logoBox": {
+        "value": "32",
+        "type": "sizing",
+        "description": "Logo placeholder width (height is half)."
+      },
+      "pinHeight": {
+        "value": "32",
+        "type": "sizing",
+        "description": "Checkout pin height."
+      }
+    },
+    "borderWidth": {
+      "hairline": {
+        "value": "0.5",
+        "type": "borderWidth",
+        "description": "Card borders and dividers."
+      },
+      "accent": {
+        "value": "2",
+        "type": "borderWidth",
+        "description": "Green accent line on the codes card (State 2b)."
+      }
+    },
+    "boxShadow": {
+      "notification": {
+        "value": {
+          "x": "0",
+          "y": "4",
+          "blur": "16",
+          "spread": "0",
+          "color": "rgba(0,0,0,0.06)",
+          "type": "dropShadow"
+        },
+        "type": "boxShadow",
+        "description": "Notification card elevation."
+      },
+      "pin": {
+        "value": {
+          "x": "0",
+          "y": "1",
+          "blur": "4",
+          "spread": "0",
+          "color": "rgba(0,0,0,0.06)",
+          "type": "dropShadow"
+        },
+        "type": "boxShadow",
+        "description": "Checkout pin elevation."
+      },
+      "tooltip": {
+        "value": {
+          "x": "0",
+          "y": "4",
+          "blur": "12",
+          "spread": "0",
+          "color": "rgba(0,0,0,0.15)",
+          "type": "dropShadow"
+        },
+        "type": "boxShadow",
+        "description": "Exclusions tooltip elevation."
+      }
+    }
+  }
+}

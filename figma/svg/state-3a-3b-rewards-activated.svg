@@ -1,0 +1,25 @@
+<svg width="400" height="360" viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg">
+  <title>State 3a-3b - Rewards activated</title>
+  <rect width="400" height="360" fill="#FAFAF6"/>
+  <g id="notification-card">
+    <rect x="40" y="20" width="320" height="320" rx="12" fill="#FFFFFF" stroke="#E5E4DF" stroke-width="0.5"/>
+<g id="logo">
+<rect x="56" y="36" width="32" height="16" rx="2" fill="#E5E4DF"/>
+<text x="72" y="47" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#999999" letter-spacing="0.6">LOGO</text>
+</g>
+<g id="lifetime-ticked">
+<text x="286" y="48" text-anchor="end" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#9A958A" text-decoration="line-through">$792</text>
+<text x="322" y="48" text-anchor="end" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#0066CC">$795.64</text>
+<text x="344" y="48" text-anchor="end" font-family="Inter, -apple-system, sans-serif" font-size="10" fill="#5A5A55">Lifetime</text>
+</g>
+<circle cx="60" cy="100" r="20" fill="#E0F2EB"/>
+<text x="60" y="107" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="20" fill="#00875A">&#10003;</text>
+<text x="92" y="98" font-family="Inter, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#1A1A1A">Rewards activated</text>
+<text x="92" y="116" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#5A5A55">$3.64 will be credited after checkout</text>
+<rect x="56" y="146" width="288" height="50" rx="8" fill="#F5F4EF"/>
+<text x="72" y="170" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#5A5A55">We&#8217;ll apply your 2% back automatically &#8212;</text>
+<text x="72" y="186" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#5A5A55">nothing extra to do at checkout.</text>
+<g id="disclosure"><text x="44" y="218" font-family="Inter, -apple-system, sans-serif" font-size="10" fill="#9A958A"><tspan font-weight="600">Exclusions apply:</tspan> Not eligible for purchases of</text><text x="44" y="232" font-family="Inter, -apple-system, sans-serif" font-size="10" fill="#9A958A">gift cards, or on orders deemed by Sephora to be</text><text x="44" y="246" font-family="Inter, -apple-system, sans-serif" font-size="10" fill="#9A958A">for reseller activity.</text></g>
+<g id="btn-outline"><rect x="56" y="262" width="288" height="36" rx="18" fill="#FFFFFF" stroke="#004977" stroke-width="0.5"/><text x="200.0" y="285" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="500" fill="#004977">Continue to checkout</text></g>
+  </g>
+</svg>
