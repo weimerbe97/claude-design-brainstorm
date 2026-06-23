@@ -1,0 +1,32 @@
+<svg width="400" height="360" viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg">
+<title>State 3c - Testing codes</title>
+<rect id="artboard-bg" width="400" height="360" fill="#FAFAF6"/>
+<g id="notification-card">
+<rect id="card-bg" x="40" y="20" width="320" height="320" rx="12" fill="#FFFFFF" stroke="#E5E4DF" stroke-width="0.5"/>
+<g id="logo">
+  <rect x="56" y="36" width="32" height="16" rx="2" fill="#E5E4DF"/>
+  <text x="72" y="47" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#999999" letter-spacing="0.6">LOGO</text>
+</g>
+<text id="header-lifetime" x="344" y="50" text-anchor="end" font-family="Inter, -apple-system, sans-serif" font-size="13" fill="#5A5A55">$792 lifetime</text>
+<g id="spinner-light">
+  <circle cx="62" cy="100" r="6" fill="none" stroke="#E5E4DF" stroke-width="1.5"/>
+  <path d="M 62 94 A 6 6 0 0 1 68 100" fill="none" stroke="#9A958A" stroke-width="1.5" stroke-linecap="round"/>
+</g>
+<text id="status-title" x="78" y="96" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#1A1A1A">Testing code 2 of 5</text>
+<text id="status-detail" x="78" y="112" font-family="Inter, -apple-system, sans-serif" font-size="13" fill="#5A5A55">Usually takes ~2 seconds</text>
+<path d="M 58 140 L 62 144 L 68 138" stroke="#1A1A1A" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="80" y="145" font-family="JetBrains Mono, monospace" font-size="12" fill="#1A1A1A">BROWSHADE</text>
+<g id="spinner-light">
+  <circle cx="63" cy="165" r="5" fill="none" stroke="#E5E4DF" stroke-width="1.5"/>
+  <path d="M 63 160 A 5 5 0 0 1 68 165" fill="none" stroke="#9A958A" stroke-width="1.5" stroke-linecap="round"/>
+</g>
+<text x="80" y="169" font-family="JetBrains Mono, monospace" font-size="12" fill="#1A1A1A">HAIRYOUTH</text>
+<circle cx="63" cy="189" r="5" fill="none" stroke="#E5E4DF" stroke-width="1"/>
+<text x="80" y="193" font-family="JetBrains Mono, monospace" font-size="12" fill="#9A958A">FRESHLOOK</text>
+<circle cx="63" cy="213" r="5" fill="none" stroke="#E5E4DF" stroke-width="1"/>
+<text x="80" y="217" font-family="JetBrains Mono, monospace" font-size="12" fill="#9A958A">BEAUTY10</text>
+<circle cx="63" cy="237" r="5" fill="none" stroke="#E5E4DF" stroke-width="1"/>
+<text x="80" y="241" font-family="JetBrains Mono, monospace" font-size="12" fill="#9A958A">SPRING25</text>
+<text x="56" y="282" font-family="Inter, -apple-system, sans-serif" font-size="13" fill="#5A5A55">Your rewards are already locked in.</text>
+</g>
+</svg>

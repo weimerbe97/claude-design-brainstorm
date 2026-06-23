@@ -1,0 +1,16 @@
+<svg width="400" height="160" viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
+<title>State 5 - Checkout pin</title>
+<rect width="400" height="160" fill="#FAFAF6"/>
+<text x="40" y="30" font-family="JetBrains Mono, monospace" font-size="10" fill="#9A958A" letter-spacing="0.8">AFTER CODE + REWARDS WIN</text>
+<g id="pin-full">
+<rect x="40" y="44" width="240" height="36" rx="18" fill="#FFFFFF" stroke="#E5E4DF" stroke-width="0.5"/>
+<path d="M 58 62 L 62 66 L 68 58" stroke="#00875A" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="78" y="66" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#1A1A1A">$18.20 off + up to $54.60 back</text>
+</g>
+<text x="40" y="112" font-family="JetBrains Mono, monospace" font-size="10" fill="#9A958A" letter-spacing="0.8">AFTER REWARDS-ONLY ACTIVATION</text>
+<g id="pin-rewards">
+<rect x="40" y="126" width="180" height="36" rx="18" fill="#FFFFFF" stroke="#E5E4DF" stroke-width="0.5"/>
+<path d="M 58 144 L 62 148 L 68 140" stroke="#00875A" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="78" y="148" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="500" fill="#1A1A1A">Up to $54.60 back ready</text>
+</g>
+</svg>
